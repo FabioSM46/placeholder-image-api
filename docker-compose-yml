@@ -1,0 +1,15 @@
+version: '3'
+services:
+  my-go-api:
+    image: fopea/placeholder-image-api:latest
+    ports:
+      - "8080:8080"  # Map container port to host port
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Required for Watchtower to interact with Docker
+    command: --interval 30  # Check for updates every 30 seconds
+    restart: always
