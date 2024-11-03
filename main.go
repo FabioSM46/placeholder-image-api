@@ -4,14 +4,27 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/FabioSM46/placeholder-image-api/api"
+	"github.com/joho/godotenv"
 )
 
 
 
 func main() {
-	http.HandleFunc("/", api.ImageHandler)
-	fmt.Println("Server starting at :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+    err := godotenv.Load()
+    if err != nil {
+        log.Printf("No .env file found or unable to load: %v", err)
+    }
+
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+        log.Println("PORT not set in .env file, using default port 8080")
+    }
+
+    http.HandleFunc("/", api.ImageHandler)
+    fmt.Printf("Server starting at :%s\n", port)
+    log.Fatal(http.ListenAndServe(":"+port, nil))
 }

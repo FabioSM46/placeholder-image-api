@@ -11,13 +11,12 @@ import (
 	"golang.org/x/image/math/fixed"
 )
 
-func GenerateImage(width, height int) image.Image {
-	// Create a new RGBA image
+// GenerateImage creates an image with a specified background color and adds the resolution text
+func GenerateImage(width, height int, bgColor color.RGBA) image.Image {
 	img := image.NewRGBA(image.Rect(0, 0, width, height))
 
-	// Fill the image with a gray background
-	gray := color.RGBA{128, 128, 128, 255} // Gray color
-	draw.Draw(img, img.Bounds(), &image.Uniform{gray}, image.Point{}, draw.Src)
+	// Fill the image with the specified background color
+	draw.Draw(img, img.Bounds(), &image.Uniform{bgColor}, image.Point{}, draw.Src)
 
 	// Create the resolution text
 	resolution := fmt.Sprintf("%dx%d", width, height)
