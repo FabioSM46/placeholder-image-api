@@ -25,6 +25,7 @@ func main() {
     }
 
     http.HandleFunc("/", api.ImageHandler)
+    http.HandleFunc("/favicon.ico", api.FaviconHandler)
     fmt.Printf("Server starting at :%s\n", port)
     log.Fatal(http.ListenAndServe(":"+port, nil))
 }
