@@ -1,5 +1,5 @@
 # Start with a minimal base image for Go
-FROM arm32v7/golang:1.20-alpine
+FROM golang:latest
 
 # Set the current working directory inside the container
 WORKDIR /app
